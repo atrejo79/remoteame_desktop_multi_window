@@ -11,7 +11,7 @@
 
 extern void fl_register_plugins(FlPluginRegistry *registry);
 
-bool rustdesk_is_subwindow = false;
+bool remoteame_is_subwindow = false;
 
 namespace
 {
@@ -29,12 +29,12 @@ FlutterWindow::FlutterWindow(
   gtk_window_set_decorated(GTK_WINDOW(window_), FALSE);
   gtk_window_set_default_size(GTK_WINDOW(window_), 1280, 720);
   gtk_window_set_position(GTK_WINDOW(window_), GTK_WIN_POS_CENTER);
-  // try setting icon for rustdesk, which uses the system cache 
+  // try setting icon for remoteame, which uses the system cache 
   // mainly for the icon in appimage.
   GtkIconTheme* theme = gtk_icon_theme_get_default();
   gint icons[4] = {256, 128, 64, 32};
   for (int i = 0; i < 4; i++) {
-    GdkPixbuf* icon = gtk_icon_theme_load_icon(theme, "rustdesk", icons[i], GTK_ICON_LOOKUP_NO_SVG, NULL);
+    GdkPixbuf* icon = gtk_icon_theme_load_icon(theme, "remoteame", icons[i], GTK_ICON_LOOKUP_NO_SVG, NULL);
     if (icon != nullptr) {
       gtk_window_set_icon(GTK_WINDOW(window_), icon);
     }
@@ -63,7 +63,7 @@ FlutterWindow::FlutterWindow(
     _g_window_created_callback(FL_PLUGIN_REGISTRY(fl_view));
   }
   // indicate to plugin injections using extern
-  rustdesk_is_subwindow = true;
+  remoteame_is_subwindow = true;
   fl_register_plugins(FL_PLUGIN_REGISTRY(fl_view));
   g_autoptr(FlPluginRegistrar)
       desktop_multi_window_registrar =
